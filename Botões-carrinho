@@ -1,0 +1,69 @@
+
+int botaoEsquerda = 2;
+int botaoDireita = 3;
+int botaoFrente = 4;
+int botaoRe = 5;
+
+int estadoBotaoEsquerda = 0;
+int estadoBotaoDireita = 0;
+int estadoBotaoFrente = 0;
+int estadoBotaoRe = 0;
+
+int c = 0;
+
+void setup()  
+{
+  pinMode(12, OUTPUT);
+  pinMode(11, OUTPUT);
+  
+  pinMode(botaoEsquerda, INPUT_PULLUP);
+  pinMode(botaoDireita, INPUT_PULLUP);
+  pinMode(botaoFrente, INPUT_PULLUP);
+  pinMode(botaoRe, INPUT_PULLUP);
+}
+
+void loop()
+{
+  estadoBotaoEsquerda = digitalRead(botaoEsquerda);
+  estadoBotaoDireita = digitalRead(botaoDireita);
+  estadoBotaoFrente = digitalRead(botaoFrente);
+  estadoBotaoRe = digitalRead(botaoRe);
+
+
+  if (estadoBotaoEsquerda == 0 && estadoBotaoDireita == 1)
+  {
+    digitalWrite(11, HIGH); 
+    digitalWrite(12, LOW);
+    delay(3000);
+    digitalWrite(11, LOW);
+  }
+  else if (estadoBotaoDireita == 0 && estadoBotaoEsquerda == 1)
+  {
+    digitalWrite(12, HIGH);
+    digitalWrite(11, LOW);
+    delay(3000);
+    digitalWrite(12, LOW);
+  }
+  else if (estadoBotaoFrente == 0)
+  {
+    digitalWrite(12, HIGH);
+    digitalWrite(11, HIGH);
+    delay(3000);
+    digitalWrite(11, LOW);
+    digitalWrite(12, LOW);
+  }
+  else if (estadoBotaoRe == 0)
+  {
+    c = 3;
+    while (0 < c) {
+      c--;
+      digitalWrite(11, HIGH);
+      digitalWrite(12, HIGH);
+      delay(1000);
+      digitalWrite(12, LOW);
+      digitalWrite(11, LOW);
+      delay(400);
+    }
+  }
+}
+
